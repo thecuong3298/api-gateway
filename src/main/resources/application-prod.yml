@@ -1,0 +1,38 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: api-gateway
+  security:
+    oauth2:
+      client:
+        registration:
+          keycloak:
+            provider: keycloak
+            client-id: amilo
+            client-secret: URxHOy3mSqu7UeXCvJA80PMTc1BFIJLK
+            authorization-grant-type: authorization_code
+            redirect-uri: http://localhost:8080/login/oauth2/code/keycloak
+            scope: openid
+        provider:
+          keycloak:
+            authorization-uri: http://192.168.0.193:8080/auth/realms/test-keycloak/protocol/openid-connect/auth
+            token-uri: http://192.168.0.193:8080/auth/realms/test-keycloak/protocol/openid-connect/token
+            user-info-uri: http://192.168.0.193:8080/auth/realms/test-keycloak/protocol/openid-connect/userinfo
+            jwk-set-uri: http://192.168.0.193:8080/auth/realms/test-keycloak/protocol/openid-connect/certs
+            user-name-attribute: name
+            user-info-authentication-method: header
+      resourceserver:
+        jwt:
+          jwk-set-uri: http://192.168.0.193:8080/auth/realms/test-keycloak/protocol/openid-connect/certs
+  cloud:
+    gateway:
+      routes:
+        - id: permission-service
+          uri: lb://PERMISSION-SERVICE
+          predicates:
+            - Path=/permission/**
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8088/eureka
