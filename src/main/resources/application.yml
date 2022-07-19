@@ -12,11 +12,11 @@ spring:
             - Path=/v3/api-docs/**
           filters:
             - RewritePath=/v3/api-docs/(?<path>.*), /$\{path}/v3/api-docs
-        - id: user-service
+        - id: user-service-swagger
           uri: http://localhost:8082
           predicates:
             - Path=/user-service/**
-        - id: cms-master
+        - id: cms-master-swagger
           uri: http://localhost:8090
           predicates:
             - Path=/cms-master/**
