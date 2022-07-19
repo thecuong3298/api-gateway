@@ -1,14 +1,17 @@
 package com.ngs.gateway.config;
 
+import io.netty.handler.logging.LogLevel;
 import org.springdoc.core.SwaggerUiConfigParameters;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.cloud.gateway.route.RouteDefinition;
 import org.springframework.cloud.gateway.route.RouteDefinitionLocator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import reactor.netty.http.client.HttpClient;
+import reactor.netty.transport.logging.AdvancedByteBufFormat;
 
 @Configuration
-public class SwaggerConfig {
+public class ApplicationConfig {
     @Bean
     public CommandLineRunner openApiGroups(
             RouteDefinitionLocator locator,
@@ -20,5 +23,10 @@ public class SwaggerConfig {
                 .filter(id -> id.matches(".*-service"))
                 .map(id -> id.replace("-service", ""))
                 .forEach(swaggerUiParameters::addGroup);
+    }
+
+    @Bean
+    HttpClient httpClient() {
+        return HttpClient.create().wiretap("LoggingFilter", LogLevel.INFO, AdvancedByteBufFormat.TEXTUAL);
     }
 }
