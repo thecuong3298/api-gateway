@@ -1,4 +1,4 @@
-package com.amilo.gateway.config;
+package com.ngs.gateway.config;
 
 import org.springdoc.core.SwaggerUiConfigParameters;
 import org.springframework.boot.CommandLineRunner;

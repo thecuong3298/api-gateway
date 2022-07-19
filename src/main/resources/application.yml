@@ -12,9 +12,7 @@ spring:
             - Path=/v3/api-docs/**
           filters:
             - RewritePath=/v3/api-docs/(?<path>.*), /$\{path}/v3/api-docs
-        - id: department-service
-          uri: http://localhost:8082
+        - id: cms-master-service
+          uri: http://localhost:8090
           predicates:
-            - Path=/department/**
-          filters:
-            - RewritePath=/department/(?<path>.*), /$\{path}
+            - Path=/cms-master/**
