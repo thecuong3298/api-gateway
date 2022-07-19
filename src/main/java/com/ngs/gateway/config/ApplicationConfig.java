@@ -20,8 +20,7 @@ public class ApplicationConfig {
                 .getRouteDefinitions().collectList().block()
                 .stream()
                 .map(RouteDefinition::getId)
-                .filter(id -> id.matches(".*-service"))
-                .map(id -> id.replace("-service", ""))
+                .filter(id -> !"openapi".equalsIgnoreCase(id))
                 .forEach(swaggerUiParameters::addGroup);
     }
 
