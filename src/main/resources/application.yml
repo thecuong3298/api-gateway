@@ -3,8 +3,23 @@ server:
 spring:
   application:
     name: api-gateway
+  security:
+    oauth2:
+      resourceserver:
+        opaquetoken:
+          introspection-uri: http://localhost:8081/oauth/check_token
+          client-id: client1
+          client-secret: secret
   cloud:
     gateway:
+      default-filters:
+        - DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowed-origins: "*"
+            allowed-headers: "*"
+            allowed-methods: "*"
       routes:
         - id: openapi
           uri: http://localhost:${server.port}
