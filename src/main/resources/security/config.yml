@@ -1,0 +1,16 @@
+yaml:
+  permit-pattern:
+    - "/v3/api-docs/**"
+    - "/swagger-ui/**"
+    - "/webjars/swagger-ui/**"
+    - "/user-service/v3/api-docs/**"
+    - "/cms-master/v3/api-docs/**"
+    - "/authorization-service/**"
+  authenticate-pattern:
+    - "/user-service/**"
+  has-role-pattern:
+    - role: admin
+      pattern:
+        - "test/**"
+        - "test2/**"
+
