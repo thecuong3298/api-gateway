@@ -21,11 +21,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    - name: Set up JDK 11
-      uses: actions/setup-java@v3
-      with:
-        java-version: '11'
-        distribution: 'temurin'
-        cache: maven
     - name: Build with Maven
-      run: mvn package
+      run: docker build -t http://docker.pkg.github.com/thecuong3298/api-gateway .
+    - name: Push to registry
+      run: docker push http://docker.pkg.github.com/thecuong3298/api-gateway
