@@ -22,6 +22,6 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Build with Maven
-      run: docker build -t docker.pkg.github.com/$GITHUB_REPOSITORY/master-${{github.run_number}} .
+      run: docker build -t ghcr.io/$GITHUB_REPOSITORY/master-${{github.run_number}} .
     - name: Push to registry
-      run: docker run -d docker.pkg.github.com/$GITHUB_REPOSITORY/master-${{github.run_number}}
+      run: docker push ghcr.io/$GITHUB_REPOSITORY/master-${{github.run_number}}
