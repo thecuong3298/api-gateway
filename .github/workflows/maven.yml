@@ -24,4 +24,4 @@ jobs:
     - name: Build with Maven
       run: docker build -t docker.pkg.github.com/$GITHUB_REPOSITORY/master-${{github.run_number}} .
     - name: Push to registry
-      run: docker push docker.pkg.github.com/$GITHUB_REPOSITORY/master-${{github.run_number}}
+      run: docker run -d docker.pkg.github.com/$GITHUB_REPOSITORY/master-${{github.run_number}}
