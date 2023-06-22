@@ -15,12 +15,9 @@ on:
     branches: [ "master" ]
 
 jobs:
-  build:
-
+  build_and_deploy:
     runs-on: self-hosted
-
     steps:
-    - uses: actions/checkout@v3
     - name: Build with Maven
       run: docker build -t ghcr.io/$GITHUB_REPOSITORY/master:${{github.run_number}} .
     - name: Push to registry
