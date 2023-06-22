@@ -22,6 +22,6 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Build with Maven
-      run: docker build -t http://docker.pkg.github.com/thecuong3298/api-gateway .
+      run: docker build -t docker.pkg.github.com/thecuong3298/api-gateway .
     - name: Push to registry
-      run: docker push http://docker.pkg.github.com/thecuong3298/api-gateway
+      run: docker push docker.pkg.github.com/thecuong3298/api-gateway
