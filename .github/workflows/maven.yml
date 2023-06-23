@@ -20,4 +20,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Build with Maven
-      run: echo "$SERVICE_NAME"
+      run: echo $SERVICE_NAME
