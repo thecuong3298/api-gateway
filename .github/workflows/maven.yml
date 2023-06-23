@@ -10,17 +10,23 @@ name: Java CI with Maven
 
 on:
   push:
-    branches: [ "master" ]
+    branches: [ "master", "develop" ]
   pull_request:
-    branches: [ "master" ]
+    branches: [ "master", "develop" ]
 
 jobs:
-  build_and_deploy:
+  build:
     runs-on: self-hosted
+    if: github.ref == 'refs/heads/master'
     steps:
     - name: Build with Maven
       run: docker build -t ghcr.io/$GITHUB_REPOSITORY/master:${{github.run_number}} .
     - name: Push to registry
       run: docker push ghcr.io/$GITHUB_REPOSITORY/master:${{github.run_number}}
+      
+  deploy:
+    runs-on: self-hosted
+    if: github.ref == 'refs/heads/develop'
+    steps:
     - name: Run docker swarm
       run: docker service update --image ghcr.io/$GITHUB_REPOSITORY/master:${{github.run_number}} gateway
